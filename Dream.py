@@ -95,7 +95,7 @@ if not Path(model_path).is_file():
 
 port_num=8080
 
-base=""~/LLM/Qwen3-0.6B-Q8_0.gguf""
+base="~/LLM/Qwen3-0.6B-Q8_0.gguf"
 
 buffer=input("Input the port number for running server, leave alone for default:8080")
 
@@ -166,7 +166,7 @@ questions={}
 
 def welcome():
     replies={}
-    replies["feelings and emotions"]=input("Hi user, how are you? Could you tell me more about your journey of feelings/emotions from this week to currently? No one is to judge about them and please be honest to yourself!")
+    replies["feelings and emotions"]=input("Hi user, how are you? Could you tell me more about your journey of feelings/emotions from this week to currently? Please be honest to yourself!")
     print("What you are doing these days determine who you are ten years later! Take part in who you are proud of, not in AI alone")
     replies["habits and dreams"]=input("Would you mind sharing more about your recent habits, regardless of how well you think about them, and your value/priorities and dreams? No matter small, large or almost unachievable, just brainstorm the best life you want to achieve!")
 
