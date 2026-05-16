@@ -1,53 +1,3 @@
-"""
-
-from llama_cpp import Llama
-
-llm = Llama.from_pretrained(
-    repo_id="Qwen/Qwen3-0.6B-GGUF",
-    filename="*Q8_0.gguf",
-    verbose=False,
-    temperature=0,
-    top_p=0.98,
-    top_k=64,
-    min_p=0.05
-    max_tokens=-1
-    last_n_tokens_size=32
-)
-
-llm.create_chat_completion(
-    messages=[
-        {
-            "role": "system",
-            "content": ""
-//feel free to change
-        }
-    ]
-)
-
-#old stuff
-
-
-"""
-
-os.environ['CONFIG_FILE'] = {
-    "host": "0.0.0.0",
-    "port": port_num,
-    "model": model_path,
-    "model_alias": alias,
-    "offload_kqv": True,
-    "flash_attn:": True,
-    "temperature": 0,
-    "top_p": 0.99,
-    "top_k": 32,
-    "min_p": 0.05,
-    "max_tokens": -1,
-    "last_n_tokens_size": 16,
-    "verbose": False
-}
-"""
-
-
-"""
 import os
 import requests
 import platform
@@ -219,11 +169,11 @@ def questions(list_of_Q_A):
 def frameworks():
 
     # generate markdown table framework from prev. replies, seperate tables of sections and contents
-    framework=client.responses.create(
+    framework=json.loads(client.responses.create(
         model=base,
         input="Based on previous conversations, generate a SWOT (Strengths, Weakness, Opportunities, Threats) analysis in JSON format with keys \"Dimension\"(string) in letter order and \"explanation\"(string)."
         store=false
-    )# prompting
+    ))# prompting
 
     dimensions=["Strengths","Weakness","Opportunities","Threats"]
     
@@ -235,7 +185,8 @@ def frameworks():
 
     replies.update(framework_response)
 
-    for ai, user in zip(framework,framework_response):
+    for section in dimensions:
+        framework
         #prompting for comparison
         print("AI vs You")
 
