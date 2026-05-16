@@ -178,7 +178,7 @@ def welcome():
     )
     # process JSON into list of questions
 
-    return questions(json.loads(response)) #prompting from AI starting questions
+    return questions(json.loads(response)) #prompting from AI questions
 
 # 2. Analyze situation through follow-up questions
 
