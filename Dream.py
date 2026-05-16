@@ -113,9 +113,9 @@ if buffer:
     else:
         alias="user-defined"
 
-init_command = "alias qwen-='~/LLM/bin/llama-server -n -1 -cmoe -cram 32 --jinja --no-warmup -fa off --numa distribute --temp 0 --top_p 0.99 --top_k 32 --min_p 0.05 -m "
+init_command = '~/LLM/bin/llama-server -n -1 -cmoe -cram 32 --jinja --no-warmup -fa off --numa distribute --temp 0 --top_p 0.99 --top_k 32 --min_p 0.05 -m '
 
-alias=base+" --port"
+alias=base+" --port "
 
 alias+=port_num
 
