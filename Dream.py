@@ -71,6 +71,7 @@ def get_valid_path(path_str: str) -> Path:
 
 model_path = get_valid_path("~/LLM/Qwen3-0.6B-Q8_0.gguf")
 
+base = get_valid_path("~/LLM")
 
 if not Path(model_path).is_file():
 
@@ -81,12 +82,10 @@ if not Path(model_path).is_file():
     FILENAME = "Qwen3-0.6B-GGUF"
 
     model = joblib.load(
-        hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
+        hf_hub_download(repo_id=REPO_ID, local_dir=base,filename=FILENAME)
     )
 
 port_num=8080
-
-base="~/LLM/Qwen3-0.6B-Q8_0.gguf"
 
 buffer=input("Input the port number for running server, leave alone for default:8080")
 
@@ -104,9 +103,11 @@ if buffer:
     else:
         alias="user-defined"
 
-init_command = '~/LLM/bin/llama-server -n -1 -cmoe -cram 32 --jinja --no-warmup -fa off --numa distribute --temp 0 --top_p 0.99 --top_k 32 --min_p 0.05 -m '
+binary=get_model_path("~/LLM/bin/llama-server")
 
-config=base+" --port "
+init_command = binary + ' -n -1 -cmoe -cram 32 --jinja --no-warmup -fa off --numa distribute --temp 0 --top_p 0.99 --top_k 32 --min_p 0.05 -m '
+
+config=model_path +" --port "
 
 config+=port_num
 
