@@ -219,16 +219,19 @@ def questions(list_of_Q_A):
 def frameworks():
 
     # generate markdown table framework from prev. replies, seperate tables of sections and contents
-    framework= client.responses.create(
+    framework=client.responses.create(
         model=base,
-        input="Generate a SWOT analysis table that highlight any lack of strong correlation or causation in thoughts, incompleteness in the scope of thinking or inconsistency in logical thinking in relation to the previous conversations that might be unobvious to the user, so as to encourage the user to ponder. Return the questions only in JSON format, with keys \"index\"(int) starting at 1 and \"questions\"(string). If there are no further questions to ask, return \"NULL\" for the key \"questions\""
+        input="Based on previous conversations, generate a SWOT (Strengths, Weakness, Opportunities, Threats) analysis in JSON format with keys \"Dimension\"(string) in letter order and \"explanation\"(string)."
         store=false
     )# prompting
+
+    dimensions=["Strengths","Weakness","Opportunities","Threats"]
+    
     framework_response={}
+    
     # ask users to fill in tables
-    for table in framework:
-        for section in table.keys():
-            framework_reponse[section]=input(section)
+    for section in dimensions:
+        framework_reponse[section]=input(section)
 
     replies.update(framework_response)
 
