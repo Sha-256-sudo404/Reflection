@@ -85,7 +85,7 @@ shell.stdin.flush()
 client = OpenAI(_url="http://localhost:8080/v1/chat/completions")
 
 response = client.responses.create(
-    model=,
+    model=model,
     instructions="Ensure there are no gaps or assumptions before answering by doubting with questions internally, and present all possible reasons in the order of impact only when helpful.
 Reaffirm with logical induction and deduction based on facts only, with step-by-step, case-by-case, level-by-level intuition internally, and display intuition only when helpful.
 Prioritize quality and effectiveness, brevity and clarity, using frameworks and tables when helpful.
