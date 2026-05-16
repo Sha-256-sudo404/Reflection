@@ -78,7 +78,7 @@ def get_valid_path(path_str: str) -> Path:
 
     return resolved
 
-model_path = get_valid_path("./Qwen3-0.6B-Q8_0.gguf")
+model_path = get_valid_path("~/LLM/Qwen3-0.6B-Q8_0.gguf")
 
 
 if not Path(model_path).is_file():
@@ -95,7 +95,7 @@ if not Path(model_path).is_file():
 
 port_num=8080
 
-base="Qwen3-0.6B-Q8_0.gguf"
+base=""~/LLM/Qwen3-0.6B-Q8_0.gguf""
 
 buffer=input("Input the port number for running server, leave alone for default:8080")
 
@@ -115,13 +115,13 @@ if buffer:
 
 init_command = '~/LLM/bin/llama-server -n -1 -cmoe -cram 32 --jinja --no-warmup -fa off --numa distribute --temp 0 --top_p 0.99 --top_k 32 --min_p 0.05 -m '
 
-alias=base+" --port "
+config=base+" --port "
 
-alias+=port_num
+config+=port_num
 
-alias+="'"
+config+="'"
 
-init_command+=alias
+init_command+=config
 
 shell_cmd = "cmd" if platform.system() == "Windows" else "bash"
 shell = subprocess.Popen(
