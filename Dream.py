@@ -18,17 +18,8 @@ llm.create_chat_completion(
     messages=[
         {
             "role": "system",
-            "content": "Ensure there are no gaps or assumptions before answering by doubting with questions internally, and present all possible reasons in the order of impact only when helpful.
-Reaffirm with logical induction and deduction based on facts only, with step-by-step, case-by-case, level-by-level intuition internally, and display intuition only when helpful.
-Prioritize quality and effectiveness, brevity and clarity, using frameworks and tables when helpful.
-Explore all related concepts, patterns and rationale to achieve operational and functional understanding.
-Explain all possible agendas, definitions, styles, techniques, objectives, relevance, significance, considerations, principles, assumptions, evidence, patterns, implications, extensions, biases, edge cases, corner cases, outliers, uncertainty, limitations, flaws, follow-up options, and counter-arguments, explicit or implicit.
-Show logical connections, differences and interplay using analogies, comparisons and roleplaying.
-Evaluate adaptability and sustainability with applicable and relatable contexts and scope and alternatives by asking where, who, when reflection questions.
-Ask all possible open-ended what-if, how and why reflection questions that challenge convention and beliefs and arouse curiosity, creativity and interests.
-Use paradoxes, dilemmas or dichotomies to illustrate all possible conundrums or ambiguities.",
-
-//refer to latest ver. on desktop
+            "content": ""
+//feel free to change
         }
     ]
 )
