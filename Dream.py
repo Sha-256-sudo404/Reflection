@@ -82,10 +82,10 @@ shell.stdin.flush()
 
 #new stuff
 
-client = OpenAI(base_url="http://localhost:8080/v1/chat/completions")
+client = OpenAI(_url="http://localhost:8080/v1/chat/completions")
 
 response = client.responses.create(
-    model=base,
+    model=,
     instructions="Ensure there are no gaps or assumptions before answering by doubting with questions internally, and present all possible reasons in the order of impact only when helpful.
 Reaffirm with logical induction and deduction based on facts only, with step-by-step, case-by-case, level-by-level intuition internally, and display intuition only when helpful.
 Prioritize quality and effectiveness, brevity and clarity, using frameworks and tables when helpful.
@@ -119,7 +119,7 @@ def welcome():
     # generate from section one replies
 
     response = client.responses.create(
-        model=base,
+        model=model,
         input=internal,
         store=false
     )
@@ -145,7 +145,7 @@ def questions(list_of_Q_A):
                 prompt+="\n"
                 prompt+="Generate three or more reflective questions that highlight any lack of strong correlation or causation in thoughts, incompleteness in the scope of thinking or inconsistency in logical thinking in relation to the previous conversations that might be unobvious to the user, so as to encourage the user to ponder. Return the questions only in JSON format, with keys \"index\"(int) starting at 1 and \"questions\"(string). If there are no further questions to ask, return \"NULL\" for the key \"questions\""
                 response = client.responses.create(
-                model=base,
+                model=model,
                 input=prompt
                 store=false
             )
@@ -153,7 +153,7 @@ def questions(list_of_Q_A):
                 return questions(NULL)
 #from AI prompt follow-up questions
     response = client.responses.create(
-        model=base,
+        model=model,
         input="Generate three or more reflective questions that highlight any lack of strong correlation or causation in thoughts, incompleteness in the scope of thinking or inconsistency in logical thinking in relation to the previous conversations that might be unobvious to the user, so as to encourage the user to ponder. Return the questions only in JSON format, with keys \"index\"(int) starting at 1 and \"questions\"(string). If there are no further questions to ask, return \"NULL\" for the key \"questions\""
         store=false
     ) #prompt for new_follow-up questions
@@ -171,7 +171,7 @@ def frameworks():
 
     # generate markdown table framework from prev. replies, seperate tables of sections and contents
     framework=json.loads(client.responses.create(
-        model=base,
+        model=model,
         input="Based on previous conversations, generate a SWOT (Strengths, Weakness, Opportunities, Threats) analysis in JSON format with keys \"Dimension\"(string) in letter order and \"explanation\"(string)."
         store=false
     ))# prompting
@@ -191,7 +191,7 @@ def frameworks():
         print("AI vs You\n")
         print(framework[section] + " versus " + framework_response +"\n")
         response=client.responses.create(
-            model=base
+            model=model
         framework[section])
 
     new_thoughts=input("Anything to add or supplement?")
