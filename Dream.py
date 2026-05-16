@@ -132,8 +132,6 @@ shell.stdin.flush()
 
 client = OpenAI(base_url="http://localhost:8080/v1/chat/completions")
 
-
-
 response = client.responses.create(
     model=base,
     instructions="Ensure there are no gaps or assumptions before answering by doubting with questions internally, and present all possible reasons in the order of impact only when helpful.
@@ -149,15 +147,12 @@ The following is a review of the current situation. Make use of all the availabl
     store=true
 )
 
-
-
 replies={}
 questions={}
 
 # 1. Welcoming and How are you? emotions+feelings for state, habits and dreams, factual not how you feel you are but who you really are
 
 def welcome():
-    replies={}
     replies["feelings and emotions"]=input("Hi user, how are you? Could you tell me more about your journey of feelings/emotions from this week to currently? Please be honest to yourself!")
     print("What you are doing these days determine who you are ten years later! Take part in who you are proud of, not in AI alone")
     replies["habits and dreams"]=input("Would you mind sharing more about your recent habits, regardless of how well you think about them, and your value/priorities and dreams? No matter small, large or almost unachievable, just brainstorm the best life you want to achieve!")
@@ -205,7 +200,7 @@ def questions(list_of_Q_A):
             )
             else:
                 return questions(NULL)
-        #from AI prompt follow-up questions
+#from AI prompt follow-up questions
     response = client.responses.create(
         model=base,
         input="Generate three or more reflective questions that highlight any lack of strong correlation or causation in thoughts, incompleteness in the scope of thinking or inconsistency in logical thinking in relation to the previous conversations that might be unobvious to the user, so as to encourage the user to ponder. Return the questions only in JSON format, with keys \"index\"(int) starting at 1 and \"questions\"(string). If there are no further questions to ask, return \"NULL\" for the key \"questions\""
@@ -215,7 +210,7 @@ def questions(list_of_Q_A):
 
     else:
         new_thoughts=input("Anything to add or supplement?")
-        replies["Additional thoughts"]=new_thoughts
+        replies["Initial Additional thoughts"]=new_thoughts
 
         return frameworks()
 
@@ -223,8 +218,12 @@ def questions(list_of_Q_A):
 
 def frameworks():
 
-    # generate markdown framework from prev. replies, seperate tables of sections and content
-    framework={} # prompting
+    # generate markdown table framework from prev. replies, seperate tables of sections and contents
+    framework= client.responses.create(
+        model=base,
+        input="Generate a SWOT analysis table that highlight any lack of strong correlation or causation in thoughts, incompleteness in the scope of thinking or inconsistency in logical thinking in relation to the previous conversations that might be unobvious to the user, so as to encourage the user to ponder. Return the questions only in JSON format, with keys \"index\"(int) starting at 1 and \"questions\"(string). If there are no further questions to ask, return \"NULL\" for the key \"questions\""
+        store=false
+    )# prompting
     framework_response={}
     # ask users to fill in tables
     for table in framework:
