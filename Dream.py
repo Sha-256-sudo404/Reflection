@@ -23,6 +23,8 @@ model_path = get_valid_path("~/LLM/Qwen3-0.6B-Q8_0.gguf")
 
 base = get_valid_path("~/LLM")
 
+model="Qwen3-0.6B-GGUF"
+
 if not Path(model_path).is_file():
 
     from huggingface_hub import hf_hub_download
@@ -96,7 +98,6 @@ Use paradoxes, dilemmas or dichotomies to illustrate all possible conundrums or 
 The following is a review of the current situation. Make use of all the available information to comprehend and ultimately coming up with a clean, specific follow-up plan for the user to track its progress on achieving his/her goals.",
     store=true
 )
-
 replies={}
 questions={}
 
@@ -181,27 +182,27 @@ def frameworks():
     
     # ask users to fill in tables
     for section in dimensions:
-        framework_reponse[section]=input(section)
+        framework_response[section]=input(section)
 
     replies.update(framework_response)
 
     for section in dimensions:
-        framework
         #prompting for comparison
-        print("AI vs You")
+        print("AI vs You\n")
+        print(framework[section] + " versus " + framework_response +"\n")
+        response=client.responses.create(
+            model=base
+        framework[section])
 
     new_thoughts=input("Anything to add or supplement?")
     replies["Additional thoughts"]+="\n"
-    replies["Additional thoughts"]+="After using frameworks"
+    replies["Additional thoughts"]+="After using frameworks, \n"
     replies["Additional thoughts"]+=new_thoughts
 
-    return comparison()
-
-# 4. Compare and contrast thought and reality
-
-def comparison():
-
     #genAI thinking/processing and review, give advice and follow-up critical thinking questions
+
+    
+    
     suggestions="" #prompting
     print(suggestions)
 
