@@ -33,6 +33,29 @@ Use paradoxes, dilemmas or dichotomies to illustrate all possible conundrums or 
     ]
 )
 
+#old stuff
+
+
+"""
+
+os.environ['CONFIG_FILE'] = {
+    "host": "0.0.0.0",
+    "port": port_num,
+    "model": model_path,
+    "model_alias": alias,
+    "offload_kqv": True,
+    "flash_attn:": True,
+    "temperature": 0,
+    "top_p": 0.99,
+    "top_k": 32,
+    "min_p": 0.05,
+    "max_tokens": -1,
+    "last_n_tokens_size": 16,
+    "verbose": False
+}
+"""
+
+
 """
 import os
 import requests
@@ -41,7 +64,7 @@ import subprocess
 import time
 from openai import OpenAI
 
-#initiate model/download model if not exists and run with unique system-prompt, different styles for different audience
+#initiate model/download model if not exists and run with unique system-prompt, can be different styles for different audience
 
 from pathlib import Path
 
@@ -99,29 +122,6 @@ alias+=port_num
 alias+="'"
 
 init_command+=alias
-
-#old stuff
-
-
-"""
-
-os.environ['CONFIG_FILE'] = {
-    "host": "0.0.0.0",
-    "port": port_num,
-    "model": model_path,
-    "model_alias": alias,
-    "offload_kqv": True,
-    "flash_attn:": True,
-    "temperature": 0,
-    "top_p": 0.99,
-    "top_k": 32,
-    "min_p": 0.05,
-    "max_tokens": -1,
-    "last_n_tokens_size": 16,
-    "verbose": False
-}
-"""
-
 
 shell_cmd = "cmd" if platform.system() == "Windows" else "bash"
 shell = subprocess.Popen(
